@@ -371,17 +371,18 @@ export default function _showElement(targetElement) {
 
     //next button
     nextTooltipButton = createElement("a");
-
     nextTooltipButton.onclick = () => {
-      if (self._introItems.length - 1 !== self._currentStep) {
-        nextStep.call(self);
-      } else if (/introjs-donebutton/gi.test(nextTooltipButton.className)) {
-        if (typeof self._introCompleteCallback === "function") {
-          self._introCompleteCallback.call(self, self._currentStep, "done");
+      //add constant delay to next step
+      setTimeout(()=>{
+        if (self._introItems.length - 1 !== self._currentStep) {
+          nextStep.call(self);
+        } else if (/introjs-donebutton/gi.test(nextTooltipButton.className)) {
+          if (typeof self._introCompleteCallback === "function") {
+            self._introCompleteCallback.call(self, self._currentStep, "done");
+          }
+          exitIntro.call(self, self._targetElement);
         }
-
-        exitIntro.call(self, self._targetElement);
-      }
+      },self._options.nextDelay)
     };
 
     setAnchorAsButton(nextTooltipButton);

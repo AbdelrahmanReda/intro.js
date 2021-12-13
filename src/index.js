@@ -32,6 +32,8 @@ function IntroJs(obj) {
   this._introItems = [];
 
   this._options = {
+    /* Next step constant delay */
+    nextDelay:0,
     /* Next button label in tooltip box */
     nextLabel: "Next",
     /* Previous button label in tooltip box */
